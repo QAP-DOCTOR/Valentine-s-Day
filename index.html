@@ -168,12 +168,27 @@
             loveText.style.animationPlayState = 'running'; // 启动动画
         }
 
+        // 初始化按钮的初始偏移量
+        let currentX = 0;
+        let currentY = 0;
+
         function moveButton() {
             const btn = document.getElementById('noBtn');
-            btn.style.transform = `translate(
-                ${Math.random() * 200 - 100}px,
-                ${Math.random() * 200 - 100}px
-            )`;
+            const minX = 100; // 水平最小移动距离
+            const maxX = 300; // 水平最大移动距离
+            const minY = 100; // 竖直最小移动距离
+            const maxY = 300; // 竖直最大移动距离
+
+            // 计算随机的水平和竖直偏移量
+            const randomX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+            const randomY = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
+
+            // 更新当前偏移量（基于上一个位置）
+            currentX += randomX;
+            currentY += randomY;
+
+            // 应用 transform 样式
+            btn.style.transform = `translate(${currentX}px, ${currentY}px)`;
         }
 
         // 动态添加粒子动画
